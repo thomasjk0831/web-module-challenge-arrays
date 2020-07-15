@@ -40,9 +40,24 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(/*code here*/){
+function is31Flavors(someArray){
 
     /*code here*/
+
+    //variable notEmpty saying this element in the array exists
+    var notEmpty = true;
+    var i=0;
+    while(notEmpty){
+        if(someArray[i]){
+            i++;
+        }
+        else
+        {
+            notEmpty=false;
+        }
+    }
+
+    return i;
 
 }
 
