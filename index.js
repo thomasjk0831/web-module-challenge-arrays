@@ -40,9 +40,15 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(/*code here*/){
+function is31Flavors(someArray){
 
     /*code here*/
+
+    //variable notEmpty saying this element in the array exists
+    if(someArray.length === 31)
+    return true;
+    else
+    return false;
 
 }
 
@@ -57,11 +63,10 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
-function addFlavor(/*code here*/){
-
-    /*code here*/
-
-}
+function addFlavor(someString,arr ){
+    arr.unshift(someString);
+    console.log(arr)
+    }
 
 
 /* Task 3: Houston, we have a problem! There are now 32 flavors in the array! Your task is to remove an item from the end of the array. 
@@ -74,10 +79,11 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
-function removeLastFlavor(/*code here*/){
+function removeLastFlavor(arr){
 
     /*code here*/
-
+    arr.pop();
+    console.log(arr);
 }
 
 /* Task 4: Write a function that returns a flavor at a given index in the array.
@@ -89,9 +95,10 @@ Your function should accept:
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
-function getFlavorByIndex(/*code here*/){
+function getFlavorByIndex(arr, index){
 
     /*code here*/
+    return arr[index];
 
 }
 
@@ -108,10 +115,18 @@ Hint: You can use .splice() for this
 
 */
 
-function removeFlavorByName(/*code here*/){
+function removeFlavorByName(arr, flavor){
 
     /*code here*/
+    for(let i=0; i<arr.length; i++)
+    {
+        if(arr[i] === 'Vanilla')
+        {
+            arr.splice(i,1)
+        }
+    }
 
+    return arr;
 }
 
 
@@ -123,9 +138,12 @@ Your function should accept:
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
 
-function copy(/*code here*/){
+function copy(newArray, oldArray){
 
     /*code here*/
+    newArray = [...oldArray];
+
+    return newArray;
 
 }
 
@@ -144,10 +162,15 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function filterByWord(/*code here*/){
-
+function filterByWord(someArray, someString){
+    var newArray=[];
     /*code here*/
+    for(let i=0; i<someArray.length; i++){
+        if(someArray[i].includes('Chocolate'))
+        newArray.push(someArray[i])
+    }
 
+    return newArray
 }
 
 
@@ -164,12 +187,39 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
-
+function getAverageWordLength(someArray){
+    //variable for how many (' ') space characters there are
+    var count = 0;
+   
+    //array containing values of number of words of each item in someArray
+    var numWordsArray = [];
     /*code here*/
+    //for loop for someArray
+    for(let i=0; i<someArray.length;i++, count=0){
+        //for loop for each individual item in someArray
+        for(let j=0; j<someArray[i].length; j++){
+            if(someArray[i][j] === ' ')
+                count++;
+            
+        }
+
+        numWordsArray.push(count+1)
+
+    }
+
+
+    //calculate and return average
+    var sum = 0;
+    
+    for(let i=0; i<numWordsArray.length; i++)
+         sum = sum + numWordsArray[i];
+    
+
+    return sum/someArray.length
 
 }
 
+ 
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
 
@@ -252,8 +302,43 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
+    function getRandomFlavors(someArray1, someArray2, someArray3, someArray4){
 
-    /*code here*/
-
-}
+        /*code here*/
+       //new array to store random items in
+       var newArray =[];
+       //random number between 1 and 4 inclusive
+       var randomNumber;
+    
+       //random item from an array
+       var randomItem;
+    
+       for(let i=0; i<31;i++){
+        //assigns a random number between 1 and 4 inclusive   
+        randomNumber = Math.floor(Math.random()*4+1)
+    
+        switch(randomNumber){
+            //case 1 push a random item from someArray1
+            case 1: randomItem = Math.floor(Math.random()*someArray1.length);
+                    newArray.push(someArray1[randomItem]);
+                    break;
+            //case 2 push a random item from someArray2
+            case 2: randomItem = Math.floor(Math.random()*someArray2.length);
+                     newArray.push(someArray2[randomItem]);
+                     break;
+            //case 3 push a random item from someArray3
+            case 3: randomItem = Math.floor(Math.random()*someArray3.length);
+                     newArray.push(someArray3[randomItem]);
+                     break;
+             //case 2 push a random item from someArray4
+            case 4: randomItem = Math.floor(Math.random()*someArray4.length);
+                      newArray.push(someArray4[randomItem]);
+                      break;
+    
+        }
+        
+      }
+    
+      return newArray;
+    }
+    
